@@ -1,0 +1,4 @@
+- name: restart supernode-gateway-bridge
+  service:
+    name: supernode-gateway-bridge
+    state: restarted

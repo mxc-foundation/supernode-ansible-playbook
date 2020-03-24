@@ -1,0 +1,100 @@
+# iptable configuration
+iptables:
+  accept:
+    -
+      port: 22
+      source: 0.0.0.0/0
+      protocol: tcp
+    -
+      port: 80
+      source: 0.0.0.0/0
+      protocol: tcp
+    -
+      port: 1883
+      source: 0.0.0.0/0
+      protocol: tcp
+    -
+      port: 1884
+      source: 0.0.0.0/0
+      protocol: tcp
+    -
+      port: 8080
+      source: 0.0.0.0/0
+      protocol: tcp
+    -
+      port: 1700
+      source: 0.0.0.0/0
+      protocol: udp
+
+# mosquitto configuration
+mosquitto:
+  # the full domain by which the MQTT broker is reachable
+  # e.g. subdomain.example.com
+  fqdn: subdomain.example.com
+  letsencrypt:
+    email: info@example.com
+    request: False
+  listeners:
+    -
+      bind_address: 0.0.0.0
+      bind_port: 1883
+      protocol: mqtt
+    -
+      bind_address: 0.0.0.0
+      bind_port: 1884
+      protocol: websockets
+  users:
+    -
+      user: chirpstack_gw
+      password: chirpstack_gw
+      topics:
+        - write gateway/+/event/+
+        - read gateway/+/command/+
+    -
+      user: chirpstack_ns
+      password: chirpstack_ns
+      topics:
+        - read gateway/+/event/+
+        - write gateway/+/command/+
+    -
+      user: chirpstack_as
+      password: chirpstack_as
+      topics:
+          - write application/+/device/+/rx
+          - write application/+/device/+/join
+          - write application/+/device/+/ack
+          - write application/+/device/+/error
+          - write application/+/device/+/status
+          - write application/+/device/+/location
+          - read application/+/device/+/tx
+    -
+      user: chirpstack_app
+      password: chirpstack_app
+      topics:
+        - write application/+/device/+/tx
+        - read application/+/device/+/rx
+        - read application/+/device/+/join
+        - read application/+/device/+/ack
+        - read application/+/device/+/error
+        - read application/+/device/+/status
+        - read application/+/device/+/location
+
+# postgresql configuration
+postgresql:
+  databases:
+    -
+      name: chirpstack_as
+      user: chirpstack_as
+      password: chirpstack_as
+    -
+      name: chirpstack_ns
+      user: chirpstack_ns
+      password: chirpstack_ns
+
+# supernode Application Server configuration.
+chirpstack_application_server:
+  fqdn: localhost
+  letsencrypt:
+    email: info@example.com
+    request: False
+

@@ -1,0 +1,4 @@
+- name: restart supernode-geolocation-server
+  service:
+    name: supernode-geolocation-server
+    state: restarted

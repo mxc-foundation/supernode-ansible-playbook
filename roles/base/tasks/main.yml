@@ -1,0 +1,21 @@
+- name: upgrade installed packages
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: install packages
+  package: name={{ item }} state=latest
+  with_items:
+    - apt-transport-https
+    - iptables-persistent
+    - sudo
+    - libcap2-bin
+
+- name: import supernode gpg key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 1CE2AFD36DBCCA00
+
+- name: add supernode deb repository
+  apt_repository:
+    repo: deb https://artifacts.supernode.io/packages/3.x/deb stable main

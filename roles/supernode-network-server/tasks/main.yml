@@ -1,0 +1,20 @@
+- name: install supernode-network-server
+  package:
+    name: supernode-network-server
+    state: latest
+
+- name: copy configuration
+  template:
+    src: supernode-network-server.toml
+    dest: /etc/supernode-network-server/supernode-network-server.toml
+    owner: networkserver
+    group: networkserver
+    mode: "0640"
+  notify:
+    - restart supernode-network-server
+
+- name: start supernode-network-server on boot
+  service:
+    name: supernode-network-server
+    state: started
+    enabled: yes

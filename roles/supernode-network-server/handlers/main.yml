@@ -1,0 +1,4 @@
+- name: restart supernode-network-server
+  service:
+    name: supernode-network-server
+    state: restarted

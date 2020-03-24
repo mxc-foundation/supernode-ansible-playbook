@@ -1,0 +1,20 @@
+- name: install supernode-gateway-bridge
+  package:
+    name: supernode-gateway-bridge
+    state: latest
+
+- name: copy configuration
+  template:
+    src: supernode-gateway-bridge.toml
+    dest: /etc/supernode-gateway-bridge/supernode-gateway-bridge.toml
+    owner: gatewaybridge
+    group: gatewaybridge
+    mode: "0640"
+  notify:
+    - restart supernode-gateway-bridge
+
+- name: start supernode-gateway-bridge on boot
+  service:
+    name: supernode-gateway-bridge
+    state: started
+    enabled: yes

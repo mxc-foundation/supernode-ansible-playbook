@@ -1,0 +1,20 @@
+- name: install supernode-geolocation-server
+  package:
+    name: supernode-geolocation-server
+    state: latest
+
+- name: copy configuration
+  template:
+    src: supernode-geolocation-server.toml
+    dest: /etc/supernode-geolocation-server/supernode-geolocation-server.toml
+    owner: geoserver
+    group: geoserver
+    mode: "0640"
+  notify:
+    - restart supernode-geolocation-server
+
+- name: start supernode-geolocation-server on boot
+  service:
+    name: supernode-geolocation-server
+    state: started
+    enabled: yes

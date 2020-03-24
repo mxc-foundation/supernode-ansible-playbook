@@ -1,0 +1,20 @@
+- name: install packages
+  package: name={{ item }} state=latest
+  with_items:
+    - mosquitto
+    - mosquitto-clients
+
+- name: copy mosquitto configuration
+  template: src=listeners.conf dest=/etc/mosquitto/conf.d/listeners.conf
+  notify:
+    - restart mosquitto
+
+- name: request letsencrypt certificate
+  command: certbot --nginx certonly --non-interactive --agree-tos -m {{ mosquitto.letsencrypt.email }} -d {{ mosquitto.fqdn }}
+  when: mosquitto.letsencrypt.request
+
+- name: start mosquitto on boot
+  service:
+    name: mosquitto
+    state: started
+    enabled: yes

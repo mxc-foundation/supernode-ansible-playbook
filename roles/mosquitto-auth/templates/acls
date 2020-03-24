@@ -1,0 +1,7 @@
+{% for user in mosquitto.users %}
+user {{ user.user }}
+{% for topic in user.topics %}
+topic {{ topic }}
+{% endfor %}
+
+{% endfor %}

@@ -1,0 +1,29 @@
+- name: install python
+  hosts:
+    - single_server
+    - vagrant
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: install python-minimal
+      raw: apt-get install -y python-minimal
+
+- name: single-server supernode setup
+  hosts:
+    - single_server
+    - vagrant
+  roles:
+    - base
+    - iptables
+    - nginx
+    - letsencrypt
+    - postgresql
+    - redis
+    - mosquitto
+    - mosquitto-auth
+    - supernode-gateway-bridge
+    - supernode-network-server
+    - supernode-application-server
+    - supernode-geolocation-server
+  become: yes

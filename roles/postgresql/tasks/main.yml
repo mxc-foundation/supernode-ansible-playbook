@@ -1,0 +1,15 @@
+- name: install packages
+  package: name={{ item }} state=latest
+  with_items:
+    - python-psycopg2
+    - postgresql
+
+- name: start postgresql on boot
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: create databases
+  include_tasks: create_db.yml
+  with_items: "{{ postgresql.databases }}"
