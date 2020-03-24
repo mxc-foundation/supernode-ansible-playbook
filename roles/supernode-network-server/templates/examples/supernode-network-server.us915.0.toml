@@ -5,7 +5,7 @@
 # configuration examples.
 
 [postgresql]
-dsn="postgres://chirpstack_ns:chirpstack_ns@localhost/chirpstack_ns?sslmode=disable"
+dsn="postgres://mxc_ns:mxc_ns@localhost/mxc_ns?sslmode=disable"
 
 [network_server]
 net_id="000000"
@@ -18,8 +18,8 @@ name="US_902_928"
 
 [network_server.gateway.backend.mqtt]
 server="tcp://localhost:1883"
-username="chirpstack_ns"
-password="chirpstack_ns"
+username="mxc_ns"
+password="mxc_ns"
 
 [geolocation_server]
 server="localhost:8005"

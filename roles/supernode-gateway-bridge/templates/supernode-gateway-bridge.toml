@@ -3,5 +3,5 @@
 
 [integration.mqtt.auth.generic]
 server="tcp://127.0.0.1:1883"
-username="chirpstack_gw"
-password="chirpstack_gw"
+username="mxc_gw"
+password="mxc_gw"

@@ -50,20 +50,20 @@ mosquitto:
     request: False
   users:
     -
-      user: chirpstack_gw
-      password: chirpstack_gw
+      user: mxc_gw
+      password: mxc_gw
       topics:
         - write gateway/+/event/+
         - read gateway/+/command/+
     -
-      user: chirpstack_ns
-      password: chirpstack_ns
+      user: mxc_ns
+      password: mxc_ns
       topics:
         - read gateway/+/event/+
         - write gateway/+/command/+
     -
-      user: chirpstack_as
-      password: chirpstack_as
+      user: mxc_as
+      password: mxc_as
       topics:
           - write application/+/device/+/rx
           - write application/+/device/+/join
@@ -73,8 +73,8 @@ mosquitto:
           - write application/+/device/+/location
           - read application/+/device/+/tx
     -
-      user: chirpstack_app
-      password: chirpstack_app
+      user: mxc_app
+      password: mxc_app
       topics:
         - write application/+/device/+/tx
         - read application/+/device/+/rx
@@ -91,16 +91,16 @@ mosquitto:
 postgresql:
   databases:
     -
-      name: chirpstack_as
-      user: chirpstack_as
-      password: chirpstack_as
+      name: mxc_as
+      user: mxc_as
+      password: mxc_as
     -
-      name: chirpstack_ns
-      user: chirpstack_ns
-      password: chirpstack_ns
+      name: mxc_ns
+      user: mxc_ns
+      password: mxc_ns
 
 # supernode Application Server configuration.
-chirpstack_application_server:
+mxc_application_server:
   # the full domain by which supernode Application Server is reachable
   # e.g. subdomain.example.com
   fqdn: localhost
